@@ -1,108 +1,106 @@
-ost-Comments Service
+# Post-Comments Service
+
 A simple Spring Boot application that allows users to create posts and add comments to those posts.
 
-Features
-Create text-based posts
+## Features
 
-Add comments to posts
+- Create text-based posts
+- Add comments to posts
+- View all posts
+- View all comments for a specific post
 
-View all posts
+- H2 in-memory database with web console
+- Basic input validation
+- Error handling
 
-View all comments for a specific post
+## Technologies
 
+- Java 11
+- Spring Boot 2.7.x
+- Spring Data JPA
+- H2 Database
+- Maven
+- Swagger (OpenAPI 3.0)
 
+## Setup Instructions
 
-H2 in-memory database with web console
+### Prerequisites
 
-Basic input validation
+- Java JDK 11 or higher
+- Maven 3.6.x or higher
 
-Error handling
+### Installation
 
-Technologies
-Java 11
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/post-comments-service.git
+   cd post-comments-service
+   ```
 
-Spring Boot 2.7.x
+2. Build the application:
+   ```bash
+   mvn clean install
+   ```
 
-Spring Data JPA
+3. Run the application:
+   ```bash
+   mvn spring-boot:run
+   ```
 
-H2 Database
+## Accessing the Application
 
-Maven
-
-Swagger (OpenAPI 3.0)
-
-Setup Instructions
-Prerequisites
-Java JDK 11 or higher
-
-Maven 3.6.x or higher
-
-Installation
-Clone the repository:
-
-bash
-git clone https://github.com/yourusername/post-comments-service.git
-cd post-comments-service
-Build the application:
-
-bash
-mvn clean install
-Run the application:
-
-bash
-mvn spring-boot:run
-Accessing the Application
 The application will start on port 8080 by default.
 
-API Endpoints
-Posts:
+### API Endpoints
 
-GET /api/posts - Get all posts
+- **Posts**:
+  - `GET /api/posts` - Get all posts
+  - `GET /api/posts/{id}` - Get a specific post
+  - `POST /api/posts` - Create a new post
 
-GET /api/posts/{id} - Get a specific post
+- **Comments**:
+  - `GET /api/posts/{postId}/comments` - Get all comments for a post
+  - `POST /api/posts/{postId}/comments` - Create a new comment for a post
 
-POST /api/posts - Create a new post
+### API Documentation
 
-Comments:
+Swagger UI is available at:  
+[http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
 
-GET /api/posts/{postId}/comments - Get all comments for a post
+### Database Console
 
-POST /api/posts/{postId}/comments - Create a new comment for a post
+H2 database console is available at:  
+[http://localhost:8080/h2-console](http://localhost:8080/h2-console)
 
-API Documentation
-Swagger UI is available at:
-http://localhost:8080/swagger-ui.html
+**Connection details**:
+- JDBC URL: `jdbc:h2:mem:postcommentsdb`
+- Username: `sa`
+- Password: (leave empty)
 
-Database Console
-H2 database console is available at:
-http://localhost:8080/h2-console
+## Request Examples
 
-Connection details:
-
-JDBC URL: jdbc:h2:mem:postcommentsdb
-
-Username: sa
-
-Password: (leave empty)
-
-Request Examples
-Create a Post
-bash
+### Create a Post
+```bash
 curl -X POST "http://localhost:8080/api/posts" \
 -H "Content-Type: application/json" \
 -d '{
     "title": "My First Post",
     "content": "This is the content of my first post."
 }'
-Create a Comment
-bash
+```
+
+### Create a Comment
+```bash
 curl -X POST "http://localhost:8080/api/posts/1/comments" \
 -H "Content-Type: application/json" \
 -d '{
     "text": "This is a comment on the first post."
 }'
-Project Structure
-text
+```
+
+## Project Structure
+
+```
 src/main/java/com/example/postcomments/
 ├── PostCommentsApplication.java         # Main application class
 ├── controllers/                        # REST controllers
@@ -123,13 +121,19 @@ src/main/java/com/example/postcomments/
 └── services/                           # Business logic
     ├── CommentService.java
     └── PostService.java
-Configuration
-The application uses an H2 in-memory database by default. Configuration can be modified in src/main/resources/application.properties.
+```
 
-Running Tests
+## Configuration
+
+The application uses an H2 in-memory database by default. Configuration can be modified in `src/main/resources/application.properties`.
+
+## Running Tests
+
 To run the unit tests:
-
-bash
+```bash
 mvn test
-License
+```
+
+## License
+
 This project is licensed under the MIT License.
